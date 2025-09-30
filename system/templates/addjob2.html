@@ -1,0 +1,952 @@
+<html>
+
+	<head>
+	{% load crispy_forms_tags %}
+		<title>Add Jobs</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+		<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
+	<style>
+			body{
+			background: -webkit-linear-gradient(left, #0072ff, #00c6ff);
+		}
+		.contact-form{
+			background: #fff;
+			margin-bottom: 5%;
+			width: 70%;
+		}
+		.contact-form .form-control{
+			border-radius:1rem;
+		}
+		.contact-image{
+			text-align: center;
+		}
+		.contact-image img{
+			border-radius: 6rem;
+			width: 11%;
+			margin-top: -3%;
+			object-fit: contain;
+		}
+		.contact-form form{
+			padding: 8%;
+		}
+		.contact-form form .row{
+			margin-bottom: -7%;
+		}
+		.contact-form h3{
+			margin-bottom: 8%;
+			margin-top: -10%;
+			text-align: center;
+			color: #0062cc;
+		}
+		.contact-form .btnContact {
+			width: 50%;
+			border: none;
+			border-radius: 1rem;
+			padding: 1.5%;
+			background: #dc3545;
+			font-weight: 600;
+			color: #fff;
+			cursor: pointer;
+		}
+		.btnContactSubmit
+		{
+			width: 50%;
+			border-radius: 1rem;
+			padding: 1.5%;
+			color: #fff;
+			background-color: #0062cc;
+			border: none;
+			cursor: pointer;
+		}
+		</style>
+		 
+		<script>
+				
+
+			/* Please ❤ this if you like it! */
+
+
+			(function($) { 
+
+				$(function() {
+					var header = $(".start-style");
+					$(window).scroll(function() {    
+						var scroll = $(window).scrollTop();
+					
+						if (scroll >= 10) {
+							header.removeClass('start-style').addClass("scroll-on");
+						} else {
+							header.removeClass("scroll-on").addClass('start-style');
+						}
+					});
+				});		
+					
+				//Animation
+				
+				$(document).ready(function() {
+					$('body.hero-anime').removeClass('hero-anime');
+					/*if ($("body").hasClass("dark")) {
+						$("body").removeClass("dark");
+						$("#switch").removeClass("switched");
+					}
+					else {
+						$("body").addClass("dark");
+						$("#switch").addClass("switched");
+					}*/
+					//initChart()
+				});
+
+				//Menu On Hover
+					
+				$('body').on('mouseenter mouseleave','.nav-item',function(e){
+						if ($(window).width() > 750) {
+							var _d=$(e.target).closest('.nav-item');_d.addClass('show');
+							setTimeout(function(){
+							_d[_d.is(':hover')?'addClass':'removeClass']('show');
+							},1);
+						}
+				});	
+				
+				//Switch light/dark
+				
+				$("#body").on('load', function () {
+					if ($("body").hasClass("dark")) {
+						$("body").removeClass("dark");
+						$("#switch").removeClass("switched");
+					}
+					else {
+						$("body").addClass("dark");
+						$("#switch").addClass("switched");
+					}
+				});  
+				
+			  })(jQuery); 
+		</script>
+		<style>
+							
+
+				/* Please ❤ this if you like it! */
+
+
+				@import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext');
+
+				/* #Primary
+				================================================== */
+
+				body{
+					font-family: 'Poppins', sans-serif;
+					font-size: 16px;
+					line-height: 24px;
+					font-weight: 400;
+					color: #212112;
+					background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg');
+					background-position: center;
+					background-repeat: repeat;
+					background-size: 7%;
+					background-color: #fff;
+					overflow-x: hidden;
+					transition: all 200ms linear;
+				}
+				::selection {
+					color: #fff;
+					background-color: #8167a9;
+				}
+				::-moz-selection {
+					color: #fff;
+					background-color: #8167a9;
+				}
+
+
+				/* #Navigation
+				================================================== */
+
+				.start-header {
+					opacity: 1;
+					transform: translateY(0);
+					padding: 20px 0;
+					box-shadow: 0 10px 30px 0 rgba(138, 155, 165, 0.15);
+					-webkit-transition : all 0.3s ease-out;
+					transition : all 0.3s ease-out;
+				}
+				.start-header.scroll-on {
+					box-shadow: 0 5px 10px 0 rgba(138, 155, 165, 0.15);
+					padding: 10px 0;
+					-webkit-transition : all 0.3s ease-out;
+					transition : all 0.3s ease-out;
+				}
+				.start-header.scroll-on .navbar-brand img{
+					height: 24px;
+					-webkit-transition : all 0.3s ease-out;
+					transition : all 0.3s ease-out;
+				}
+				.navigation-wrap{
+					position: fixed;
+					width: 100%;
+					top: 0;
+					left: 0;
+					z-index: 1000;
+					-webkit-transition : all 0.3s ease-out;
+					transition : all 0.3s ease-out;
+				}
+				.navbar{
+					padding: 0;
+				}
+				.navbar-brand img{
+					height: 38px;
+					width: auto;
+					display: block;
+					-webkit-transition : all 0.3s ease-out;
+					transition : all 0.3s ease-out;
+				}
+				.navbar-toggler {
+					float: right;
+					border: none;
+					padding-right: 0;
+				}
+				.navbar-toggler:active,
+				.navbar-toggler:focus {
+					outline: none;
+				}
+				.navbar-light .navbar-toggler-icon {
+					width: 24px;
+					height: 17px;
+					background-image: none;
+					position: relative;
+					border-bottom: 1px solid #000;
+					transition: all 300ms linear;
+				}
+				.navbar-light .navbar-toggler-icon:after, 
+				.navbar-light .navbar-toggler-icon:before{
+					width: 24px;
+					position: absolute;
+					height: 1px;
+					background-color: #000;
+					top: 0;
+					left: 0;
+					content: '';
+					z-index: 2;
+					transition: all 300ms linear;
+				}
+				.navbar-light .navbar-toggler-icon:after{
+					top: 8px;
+				}
+				.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:after {
+					transform: rotate(45deg);
+				}
+				.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:before {
+					transform: translateY(8px) rotate(-45deg);
+				}
+				.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+					border-color: transparent;
+				}
+				.nav-link{
+					color: #212121 !important;
+					font-weight: 500;
+					transition: all 200ms linear;
+				}
+				.nav-item:hover .nav-link{
+					color: #8167a9 !important;
+				}
+				.nav-item.active .nav-link{
+					color: #777 !important;
+				}
+				.nav-link {
+					position: relative;
+					padding: 5px 0 !important;
+					display: inline-block;
+				}
+				.nav-item:after{
+					position: absolute;
+					bottom: -5px;
+					left: 0;
+					width: 100%;
+					height: 2px;
+					content: '';
+					background-color: #8167a9;
+					opacity: 0;
+					transition: all 200ms linear;
+				}
+				.nav-item:hover:after{
+					bottom: 0;
+					opacity: 1;
+				}
+				.nav-item.active:hover:after{
+					opacity: 0;
+				}
+				.nav-item{
+					position: relative;
+					transition: all 200ms linear;
+				}
+
+				/* #Primary style
+				================================================== */
+
+				.bg-light {
+					background-color: #fff !important;
+					transition: all 200ms linear;
+				}
+				.section {
+					position: relative;
+					width: 100%;
+					display: block;
+				}
+				.full-height {
+					height: 100vh;
+				}
+				.over-hide {
+					overflow: hidden;
+				}
+				.absolute-center {
+					position: absolute;
+					top: 50%;
+					left: 0;
+					width: 100%;
+				  margin-top: 40px;
+					transform: translateY(-50%);
+					z-index: 20;
+				}
+				h1{
+					font-size: 48px;
+					line-height: 1.2;
+					font-weight: 700;
+					color: #212112;
+					text-align: center;
+				}
+				p{
+					text-align: center;
+					margin: 0;
+					padding-top: 10px;
+					opacity: 1;
+					transform: translate(0);
+					transition: all 300ms linear;
+					transition-delay: 1700ms;
+				}
+				body.hero-anime p{
+					opacity: 0;
+					transform: translateY(40px);
+					transition-delay: 1700ms;
+				}
+				h1 span{
+					display: inline-block;
+					transition: all 300ms linear;
+					opacity: 1;
+					transform: translate(0);
+				}
+				body.hero-anime h1 span:nth-child(1){
+					opacity: 0;
+					transform: translateY(-20px);
+				}
+				body.hero-anime h1 span:nth-child(2){
+					opacity: 0;
+					transform: translateY(-30px);
+				}
+				body.hero-anime h1 span:nth-child(3){
+					opacity: 0;
+					transform: translateY(-50px);
+				}
+				body.hero-anime h1 span:nth-child(4){
+					opacity: 0;
+					transform: translateY(-10px);
+				}
+				body.hero-anime h1 span:nth-child(5){
+					opacity: 0;
+					transform: translateY(-50px);
+				}
+				body.hero-anime h1 span:nth-child(6){
+					opacity: 0;
+					transform: translateY(-20px);
+				}
+				body.hero-anime h1 span:nth-child(7){
+					opacity: 0;
+					transform: translateY(-40px);
+				}
+				body.hero-anime h1 span:nth-child(8){
+					opacity: 0;
+					transform: translateY(-10px);
+				}
+				body.hero-anime h1 span:nth-child(9){
+					opacity: 0;
+					transform: translateY(-30px);
+				}
+				body.hero-anime h1 span:nth-child(10){
+					opacity: 0;
+					transform: translateY(-20px);
+				}
+				h1 span:nth-child(1){
+					transition-delay: 1000ms;
+				}
+				h1 span:nth-child(2){
+					transition-delay: 700ms;
+				}
+				h1 span:nth-child(3){
+					transition-delay: 900ms;
+				}
+				h1 span:nth-child(4){
+					transition-delay: 800ms;
+				}
+				h1 span:nth-child(5){
+					transition-delay: 1000ms;
+				}
+				h1 span:nth-child(6){
+					transition-delay: 700ms;
+				}
+				h1 span:nth-child(7){
+					transition-delay: 900ms;
+				}
+				h1 span:nth-child(8){
+					transition-delay: 800ms;
+				}
+				h1 span:nth-child(9){
+					transition-delay: 600ms;
+				}
+				h1 span:nth-child(10){
+					transition-delay: 700ms;
+				}
+				body.hero-anime h1 span:nth-child(11){
+					opacity: 0;
+					transform: translateY(30px);
+				}
+				body.hero-anime h1 span:nth-child(12){
+					opacity: 0;
+					transform: translateY(50px);
+				}
+				body.hero-anime h1 span:nth-child(13){
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				body.hero-anime h1 span:nth-child(14){
+					opacity: 0;
+					transform: translateY(30px);
+				}
+				body.hero-anime h1 span:nth-child(15){
+					opacity: 0;
+					transform: translateY(50px);
+				}
+				h1 span:nth-child(11){
+					transition-delay: 1300ms;
+				}
+				h1 span:nth-child(12){
+					transition-delay: 1500ms;
+				}
+				h1 span:nth-child(13){
+					transition-delay: 1400ms;
+				}
+				h1 span:nth-child(14){
+					transition-delay: 1200ms;
+				}
+				h1 span:nth-child(15){
+					transition-delay: 1450ms;
+				}
+				#switch,
+				#circle {
+					cursor: pointer;
+					-webkit-transition: all 300ms linear;
+					transition: all 300ms linear; 
+				} 
+				#switch {
+					width: 60px;
+					height: 8px;
+					border: 2px solid #8167a9;
+					border-radius: 27px;
+					background: #000;
+					position: relative;
+					display: block;
+					margin: 0 auto;
+					text-align: center;
+					opacity: 1;
+					transform: translate(0);
+					transition: all 300ms linear;
+					transition-delay: 1900ms;
+				}
+				body.hero-anime #switch{
+					opacity: 0;
+					transform: translateY(40px);
+					transition-delay: 1900ms;
+				}
+				#circle {
+					position: absolute;
+					top: -11px;
+					left: -13px;
+					width: 26px;
+					height: 26px;
+					border-radius: 50%;
+					background: #000;
+				}
+				.switched {
+					border-color: #000 !important;
+					background: #8167a9 !important;
+				}
+				.switched #circle {
+					left: 43px;
+					box-shadow: 0 4px 4px rgba(26,53,71,0.25), 0 0 0 1px rgba(26,53,71,0.07);
+					background: #fff;
+				}
+				.nav-item .dropdown-menu {
+					transform: translate3d(0, 10px, 0);
+					visibility: hidden;
+					opacity: 0;
+					max-height: 0;
+					display: block;
+					padding: 0;
+					margin: 0;
+					transition: all 200ms linear;
+				}
+				.nav-item.show .dropdown-menu {
+					opacity: 1;
+					visibility: visible;
+					max-height: 999px;
+					transform: translate3d(0, 0px, 0);
+				}
+				.dropdown-menu {
+					padding: 10px!important;
+					margin: 0;
+					font-size: 13px;
+					letter-spacing: 1px;
+					color: #212121;
+					background-color: #fcfaff;
+					border: none;
+					border-radius: 3px;
+					box-shadow: 0 5px 10px 0 rgba(138, 155, 165, 0.15);
+					transition: all 200ms linear;
+				}
+				.dropdown-toggle::after {
+					display: none;
+				}
+
+				.dropdown-item {
+					padding: 3px 15px;
+					color: #212121;
+					border-radius: 2px;
+					transition: all 200ms linear;
+				}
+				.dropdown-item:hover, 
+				.dropdown-item:focus {
+					color: #fff;
+					background-color: rgba(129,103,169,.6);
+				}
+
+				body.dark{
+					color: #fff;
+					background-color: #1f2029;
+				}
+				body.dark .navbar-brand img{
+				  filter: brightness(100%);
+				}
+				body.dark h1{
+					color: #fff;
+				}
+				body.dark h1 span{
+					transition-delay: 0ms !important;
+				}
+				body.dark p{
+					color: #fff;
+					transition-delay: 0ms !important;
+				}
+				body.dark .bg-light {
+					background-color: #14151a !important;
+				}
+				body.dark .start-header {
+					box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
+				}
+				body.dark .start-header.scroll-on {
+					box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.15);
+				}
+				body.dark .nav-link{
+					color: #fff !important;
+				}
+				body.dark .nav-item.active .nav-link{
+					color: #999 !important;
+				}
+				body.dark .dropdown-menu {
+					color: #fff;
+					background-color: #1f2029;
+					box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
+				}
+				body.dark .dropdown-item {
+					color: #fff;
+				}
+				body.dark .navbar-light .navbar-toggler-icon {
+					border-bottom: 1px solid #fff;
+				}
+				body.dark .navbar-light .navbar-toggler-icon:after, 
+				body.dark .navbar-light .navbar-toggler-icon:before{
+					background-color: #fff;
+				}
+				body.dark .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+					border-color: transparent;
+				}
+
+
+
+				/* #Media
+				================================================== */
+
+				@media (max-width: 767px) { 
+					h1{
+						font-size: 38px;
+					}
+					.nav-item:after{
+						display: none;
+					}
+					.nav-item::before {
+						position: absolute;
+						display: block;
+						top: 15px;
+						left: 0;
+						width: 11px;
+						height: 1px;
+						content: "";
+						border: none;
+						background-color: #000;
+						vertical-align: 0;
+					}
+					.dropdown-toggle::after {
+						position: absolute;
+						display: block;
+						top: 10px;
+						left: -23px;
+						width: 1px;
+						height: 11px;
+						content: "";
+						border: none;
+						background-color: #000;
+						vertical-align: 0;
+						transition: all 200ms linear;
+					}
+					.dropdown-toggle[aria-expanded="true"]::after{
+						transform: rotate(90deg);
+						opacity: 0;
+					}
+					.dropdown-menu {
+						padding: 0 !important;
+						background-color: transparent;
+						box-shadow: none;
+						transition: all 200ms linear;
+					}
+					.dropdown-toggle[aria-expanded="true"] + .dropdown-menu {
+						margin-top: 10px !important;
+						margin-bottom: 20px !important;
+					}
+					body.dark .nav-item::before {
+						background-color: #fff;
+					}
+					body.dark .dropdown-toggle::after {
+						background-color: #fff;
+					}
+					body.dark .dropdown-menu {
+						background-color: transparent;
+						box-shadow: none;
+					}
+				}
+
+				/* #Link to page
+				================================================== */
+
+				.logo {
+					position: absolute;
+					bottom: 30px;
+					right: 30px;
+					display: block;
+					z-index: 100;
+					transition: all 250ms linear;
+				}
+				.logo img {
+					height: 26px;
+					width: auto;
+					display: block;
+				  filter: brightness(10%);
+					transition: all 250ms linear;
+				}
+				body.dark .logo img {
+				  filter: brightness(100%);
+				}
+			</style>
+			
+			<style>
+				body{margin-top:20px;}
+
+				.card-big-shadow {
+					max-width: 320px;
+					position: relative;
+				}
+
+				.coloured-cards .card {
+					margin-top: 30px;
+				}
+
+				.card[data-radius="none"] {
+					border-radius: 0px;
+				}
+				.card {
+					border-radius: 8px;
+					box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+					background-color: #FFFFFF;
+					color: #252422;
+					margin-bottom: 20px;
+					position: relative;
+					z-index: 1;
+				}
+
+
+				.card[data-background="image"] .title, .card[data-background="image"] .stats, .card[data-background="image"] .category, .card[data-background="image"] .description, .card[data-background="image"] .content, .card[data-background="image"] .card-footer, .card[data-background="image"] small, .card[data-background="image"] .content a, .card[data-background="color"] .title, .card[data-background="color"] .stats, .card[data-background="color"] .category, .card[data-background="color"] .description, .card[data-background="color"] .content, .card[data-background="color"] .card-footer, .card[data-background="color"] small, .card[data-background="color"] .content a {
+					color: #FFFFFF;
+				}
+				.card.card-just-text .content {
+					padding: 50px 65px;
+					text-align: center;
+				}
+				.card .content {
+					padding: 20px 20px 10px 20px;
+				}
+				.card[data-color="blue"] .category {
+					color: #7a9e9f;
+				}
+
+				.card .category, .card .label {
+					font-size: 14px;
+					margin-bottom: 0px;
+				}
+				.card-big-shadow:before {
+					background-image: url("http://static.tumblr.com/i21wc39/coTmrkw40/shadow.png");
+					background-position: center bottom;
+					background-repeat: no-repeat;
+					background-size: 100% 100%;
+					bottom: -12%;
+					content: "";
+					display: block;
+					left: -12%;
+					position: absolute;
+					right: 0;
+					top: 0;
+					z-index: 0;
+				}
+				h4, .h4 {
+					font-size: 1.5em;
+					font-weight: 600;
+					line-height: 1.2em;
+				}
+				h6, .h6 {
+					font-size: 0.9em;
+					font-weight: 600;
+					text-transform: uppercase;
+				}
+				.card .description {
+					font-size: 15px;
+					color: #66615b;
+				}
+				.card .showDetail {
+					font-size: 15px;
+					color: white;
+				}
+				.content-card{
+					margin-top:30px;    
+				}
+				a:hover, a:focus {
+					text-decoration: none;
+				}
+
+				/*======== COLORS ===========*/
+				.card[data-color="blue"] {
+					background: #b8d8d8;
+				}
+				.card[data-color="blue"] .description {
+					color: #506568;
+				}
+
+				.card[data-color="green"] {
+					background: #d5e5a3;
+				}
+				.card[data-color="green"] .description {
+					color: #60773d;
+				}
+				.card[data-color="green"] .category {
+					color: #92ac56;
+				}
+
+				.card[data-color="yellow"] {
+					background: #ffe28c;
+				}
+				.card[data-color="yellow"] .description {
+					color: #b25825;
+				}
+				.card[data-color="yellow"] .category {
+					color: #d88715;
+				}
+
+				.card[data-color="brown"] {
+					background: #d6c1ab;
+				}
+				.card[data-color="brown"] .description {
+					color: #75442e;
+				}
+				.card[data-color="brown"] .category {
+					color: #a47e65;
+				}
+
+				.card[data-color="purple"] {
+					background: #baa9ba;
+				}
+				.card[data-color="purple"] .description {
+					color: #3a283d;
+				}
+				.card[data-color="purple"] .category {
+					color: #5a283d;
+				}
+
+				.card[data-color="orange"] {
+					background: #ff8f5e;
+				}
+				.card[data-color="orange"] .description {
+					color: #772510;
+				}
+				.card[data-color="orange"] .category {
+					color: #e95e37;
+				}
+				.pad {
+					padding: 8%;
+				}
+			</style>
+			<script>
+				$(document).ready(function(){
+
+				$("#a").css('visibility', 'hidden');
+				$("#b").css('visibility', 'hidden');
+
+				});
+				</script>
+	</head>
+
+	<body class="hero-anime">	
+
+		<div class="navigation-wrap bg-light start-header start-style">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<nav class="navbar navbar-expand-md navbar-light">
+						
+							<a class="navbar-brand" href="/">
+								<img src="https://png.pngtree.com/png-clipart/20190925/original/pngtree-vector-resume-icon-png-image_4872572.jpg" alt="">
+							</a>	
+							
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							
+							<div class="collapse navbar-collapse" id="navbarSupportedContent">
+								<ul class="navbar-nav ml-auto py-4 py-md-0">
+									<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4 active">
+										<a class="nav-link dropdown-toggle" href="/addjob" role="button">Add Job</a>
+									</li>
+									<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+										<a class="nav-link" href="../result">Result</a>
+									</li>
+									<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+										<a class="nav-link" href="../accounts/logout/">Log out</a>
+									</li>
+								</ul>
+							</div>
+							
+						</nav>		
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="section full-height">
+			<div class="pad">
+						
+						<div class="container contact-form rounded">
+					<div class="contact-image">
+						<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkZRjub0AVEvo7fKsh0xP-HCRIuT-PAeMQc121PMC1UEB9GiblrfuWe37OufOsoqvT5nY&usqp=CAU" alt="job"/>
+					</div>
+					<form action="" method="POST" id="upload_form">
+						{% csrf_token %}
+						<h3>Add New Job</h3>
+					   <div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									{{ form.title|as_crispy_field }}
+								</div>
+								<div class="form-group" id="a">
+									<input type="text" name="txtEmail" class="form-control" placeholder="Your Email *" value="" />
+								</div>
+								<div class="form-group" id="b">
+									<input type="text" name="txtPhone" class="form-control" placeholder="Your Phone Number *" value="" />
+								</div>
+								<div class="form-group">
+									<input type="submit" name="btnSubmit" class="btnContact" value="Add Now" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									{{ form.description|as_crispy_field }}
+									<!-- <textarea name="txtMsg" class="form-control" placeholder="Your Message *" style="width: 100%; height: 150px;"></textarea> -->
+								</div>
+							</div>
+						</div>
+					</form>
+		</div>
+				
+			</div>
+		</div>
+
+	</body>
+	
+	<script>
+        const uploadForm = document.getElementById('upload_form');
+        $("#upload_form").submit(function(e){
+            e.preventDefault();
+            $form = $(this)
+            var formData = new FormData(this);
+
+            $.ajax({
+                type: 'POST',
+                url:'',
+                data: formData,
+                dataType: 'json',
+                beforeSend: function(){},
+                success: function(response){
+                    console.log(response);
+                    uploadForm.reset()
+					if(response.data != 'Something went wrong!!')
+					Swal.fire({
+					  icon: 'success',
+					  title: 'Success',
+					  text: response.data || 'Done...'
+					})					
+					else
+					Swal.fire({
+					  icon: 'error',
+					  title: 'Oops...',
+					  text: err.data || 'Something went wrong!'
+					})
+                },
+                error: function(err){
+                    console.log(err);
+					Swal.fire({
+					  icon: 'error',
+					  title: 'Oops...',
+					  text: err.data || 'Something went wrong!'
+					})
+                },
+                cache: false,
+                contentType: false,
+                processData: false,
+            });
+        });
+		
+    </script>
+</html>
